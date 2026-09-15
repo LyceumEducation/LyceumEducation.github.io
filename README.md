@@ -964,28 +964,15 @@ To report bugs or suggest features:
 
 ---
 
-## 📄 License & Copyright
+## 📄 License & Terms of Use
 
-© 2026 Daniel Garnsey. All rights reserved.
+`Conjugación` is proprietary software. All rights are reserved by Daniel Garnsey. 
 
-**Conjugación** is proprietary software. Unauthorized reproduction, distribution, modification, or use of this application without explicit written permission from Daniel Garnsey is strictly prohibited.
+* **Permitted:** Personal, non-commercial educational use and classroom study.
+* **Prohibited:** Commercial distribution, modification, creating derivative works, or reverse engineering.
 
-### Permitted Use
+For the full legal terms, restrictions, and liability disclaimers, please see the [LICENSE](LICENSE) file. For licensing inquiries, contact Daniel Garnsey directly.
 
-- Personal, non-commercial educational use
-- Academic study and reference
-- Use within accredited educational institutions with proper attribution
-
-### Prohibited Use
-
-- Commercial licensing or sale
-- Redistribution or republication
-- Modification or creation of derivative works
-- Reverse engineering or decompilation
-- Public display or performance without permission
-- Integration into other products or services
-
-For licensing inquiries, permissions, or usage rights, contact Daniel Garnsey directly.
 
 ---
 
