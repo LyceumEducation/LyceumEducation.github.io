@@ -953,14 +953,17 @@ Explanation:
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contributing & Development
 
-This project is maintained by Lyceum Education. Contributions are welcome!
+`Conjugación` is a closed-source, proprietary project. Development, code modifications, and feature updates are strictly limited to the official **Lyceum Education** core team. 
 
-To report bugs or suggest features:
-1. Open an issue on GitHub
-2. Describe the verb and expected conjugation
-3. Include error messages or screenshots
+* **No Pull Requests:** We do not accept external code contributions, forks intended for merging, or pull requests. Any unsolicited pull requests will be closed without review.
+* **How to Help:** While you cannot modify the code, we highly value user feedback! If you find an error in a verb conjugation or want to request a feature, please submit an issue.
+
+### To report bugs or suggest features:
+1. Open an issue on GitHub.
+2. Describe the specific verb and the expected conjugation rules.
+3. Include error messages, clear descriptions, or screenshots if possible.
 
 ---
 
