@@ -969,12 +969,12 @@ Explanation:
 
 ## 📄 License & Terms of Use
 
-`Conjugación` is proprietary software. All rights are reserved by Daniel Garnsey. 
+`Conjugación` is proprietary software. All rights are reserved by Daniel Garnsey (Lyceum Education). 
 
 * **Permitted:** Personal, non-commercial educational use and classroom study.
 * **Prohibited:** Commercial distribution, modification, creating derivative works, or reverse engineering.
 
-For the full legal terms, restrictions, and liability disclaimers, please see the [LICENSE](LICENSE) file. For licensing inquiries, contact Daniel Garnsey directly.
+For the full legal terms, restrictions, and liability disclaimers, please see the [LICENSE](LICENSE) file. For licensing inquiries, contact Daniel Garnsey (Lyceum Education) directly.
 
 
 ---
