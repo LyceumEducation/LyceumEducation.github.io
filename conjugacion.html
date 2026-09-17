@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conjugación | Present Tense Lab</title>
+    <title>Conjugation Lab | Present Tense</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +26,8 @@
         body::before { position: fixed; z-index: -1; top: 0; right: 0; width: 42vw; height: 42vw; max-width: 600px; max-height: 600px; border: 2px solid var(--ink); border-radius: 50%; content: ""; opacity: .11; transform: translate(28%, -38%); }
         body::after { position: fixed; z-index: -1; bottom: -100px; left: -80px; width: 260px; height: 260px; border: 2px solid var(--red); border-radius: 50%; content: ""; opacity: .18; }
         .shell { width: min(1160px, 100%); margin: auto; }
-        header { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; min-height: 120px; border-bottom: 2px solid var(--line); margin-bottom: 26px; padding: 24px 0 22px; }
-        .home-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 700 .76rem "Space Grotesk", sans-serif; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 25px; }
+        header { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; min-height: 120px; margin-bottom: 26px; padding: 24px 0 22px; }
+        .home-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 700 .76rem "Space Grotesk", sans-serif; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; margin-bottom: 25px; }
         .home-link::before { display: grid; place-items: center; width: 25px; height: 25px; border: 2px solid var(--ink); background: var(--acid); content: "L"; font-size: .78rem; transform: rotate(-6deg); }
         .home-link:hover, .home-link:focus-visible { color: var(--blue); }
         .eyebrow { color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; margin-bottom: 10px; }
@@ -35,16 +35,16 @@
         h1 { font-size: clamp(3.5rem, 9vw, 7.8rem); line-height: .76; letter-spacing: -.105em; }
         .title-dot { display: inline-block; color: var(--blue); transform-origin: 50% 100%; }
         .title-dot.bounce { animation: dot-bounce 980ms ease-out; }
-        .layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr); gap: 14px; }
+        .layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr); gap: 14px; position: relative; }
         .card { border: 2px solid var(--line); border-radius: 0; background: var(--white); padding: clamp(22px, 4vw, 38px); box-shadow: 8px 8px 0 var(--ink); }
-        .workspace { min-height: 515px; overflow: hidden; position: relative; }
+        .workspace { min-height: 515px; overflow: visible; position: relative; z-index: 2; }
         .workspace::after { position: absolute; z-index: 0; right: 18px; top: -35px; color: rgba(49,85,219,.09); content: "á"; font: 700 220px "Space Grotesk"; pointer-events: none; }
         .workspace > *, .reference > * { position: relative; z-index: 1; }
         .heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 27px; }
         h2 { font-size: 1.45rem; line-height: .95; letter-spacing: -.065em; }
         .status { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
         .status::before { width: 9px; height: 9px; border: 2px solid var(--ink); background: var(--acid); content: ""; }
-        .controls { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(150px, .85fr) auto; gap: 11px; align-items: end; }
+        .controls { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(150px, .85fr) auto; gap: 11px; align-items: end; position: relative; z-index: 3; }
         .controls + .result { margin-top: 25px; }
         .submit-verb { position: relative; width: 49px; height: 49px; border: 2px solid var(--ink); border-radius: 0; color: var(--ink); background: var(--acid); cursor: pointer; transition: .2s ease; }
         .submit-verb::before { position: absolute; top: 50%; left: 50%; width: 20px; height: 14px; content: ""; background: currentColor; clip-path: polygon(0 36%, 64% 36%, 64% 0, 100% 50%, 64% 100%, 64% 64%, 0 64%); transform: translate(-50%, -50%); }
@@ -59,17 +59,22 @@
         .subject-trigger::after { width: 8px; height: 8px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); content: ""; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
         .subject-picker.open .subject-trigger { border-color: var(--blue); box-shadow: 4px 4px 0 var(--blue); transform: translate(-2px, -2px); }
         .subject-picker.open .subject-trigger::after { transform: rotate(225deg) translate(-2px, -2px); }
-        .subject-menu { position: absolute; z-index: 8; top: calc(100% + 8px); left: 0; right: 0; visibility: hidden; opacity: 0; transform: translateY(-10px); border: 2px solid var(--line); border-radius: 0; background: var(--white); box-shadow: 6px 6px 0 var(--ink); padding: 5px; pointer-events: none; transition: opacity .2s, transform .2s, visibility .2s; }
+        .subject-menu { position: absolute; z-index: 20; top: calc(100% + 8px); left: 0; right: 0; visibility: hidden; max-height: 290px; overflow-y: auto; opacity: 0; transform: translateY(-10px); border: 2px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: 6px 6px 0 var(--ink); padding: 5px; pointer-events: none; transition: opacity .2s, transform .2s, visibility .2s; }
         .subject-picker.open .subject-menu { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
         .subject-option { display: block; width: 100%; border: 0; border-radius: 0; background: transparent; color: var(--ink); cursor: pointer; font: 600 .88rem "DM Sans"; padding: 10px; text-align: left; transition: background .15s, transform .15s; }
         .subject-option:hover, .subject-option:focus-visible { background: var(--acid); outline: none; transform: translateX(3px); }
         input:hover, input:focus, select:hover, select:focus { border-color: var(--blue); box-shadow: 4px 4px 0 var(--blue); transform: translate(-2px, -2px); }
+        input:focus-visible, select:focus-visible { outline: none; }
         .result { min-height: 235px; position: relative; overflow: hidden; border: 2px solid var(--ink); border-radius: 0; color: var(--white); padding: 26px; background: var(--ink); transition: background .25s, transform .25s; }
         .result:hover { transform: translate(-3px, -3px); }
         .result::before { position: absolute; width: 180px; height: 180px; border: 2px solid rgba(255,255,255,.24); border-radius: 50%; content: ""; right: -52px; top: -58px; }
         .result.ar { background: var(--blue); } .result.er { background: var(--red); } .result.ir { background: var(--teal); } .result.error { background: #6d234b; }
         .result-label { color: rgba(255,255,255,.75); font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
         .word { font-size: clamp(2.5rem, 7vw, 4.2rem); letter-spacing: -.08em; margin: 13px 0 18px; }
+        .word .changed, .word .ending { font-weight: 700; }
+        .result.ar .changed, .result.ar .ending { color: #aebaff; }
+        .result.er .changed, .result.er .ending { color: #ffb09d; }
+        .result.ir .changed, .result.ir .ending { color: #91e7ba; }
         .word.answer-enter { animation: answer-enter .55s cubic-bezier(.22,1,.36,1); }
         .explanation { max-width: 530px; color: rgba(255,255,255,.86); font-size: .9rem; line-height: 1.55; }
         .explanation strong { color: var(--acid); }
@@ -78,7 +83,7 @@
         .legend span { border: 2px solid var(--ink); color: var(--ink); font: 700 .72rem "Space Grotesk"; padding: 6px 9px; }
         .legend .ar { background: #9eafff; } .legend .er { background: #ff9b83; } .legend .ir { background: #8be0b2; }
         .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+        table { width: 100%; border-collapse: collapse; font-size: .92rem; }
         th, td { border-bottom: 2px solid var(--ink); padding: 11px 7px; text-align: left; }
         th { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
         td:not(:first-child), th:not(:first-child) { text-align: center; }
@@ -96,7 +101,7 @@
 <body>
     <main class="shell">
         <header>
-            <div><a class="home-link" href="index.html">Lyceum Education</a><div class="eyebrow">Spanish conjugation lab</div><h1>Conjugación<span class="title-dot">.</span></h1></div>
+            <div><a class="home-link" href="index.html">Lyceum Education</a><div class="eyebrow">Spanish present tense</div><h1>Conjugation Lab<span class="title-dot">.</span></h1></div>
         </header>
         <div class="layout">
             <section class="card workspace" aria-labelledby="engine-title">
@@ -119,7 +124,7 @@
                 <div class="note"><strong>Stem-change tip:</strong> the highlighted vowel shifts in every form except <strong>nosotros</strong> and <strong>vosotros</strong>. Try <em>pensar</em>, <em>dormir</em>, or <em>pedir</em>.</div>
             </section>
         </div>
-        <footer>© 2026 Daniel Garnsey (Lyceum Education) · Built for curious language learners</footer>
+        <footer>© 2026 Lyceum Education · Built for curious language learners</footer>
     </main>
     <script>
         const endings = {
@@ -653,9 +658,15 @@
             if (data.type && data.stem.changed !== data.stem.plain) {
                 const plain = data.stem.plain;
                 const changed = data.stem.changed;
-                const index = [...changed].findIndex((character, charIndex) => character !== plain[charIndex]);
-                const endIndex = index >= 0 ? index + (changed.length - plain.length || 1) : changed.length;
-                stemHTML = `${changed.slice(0, index < 0 ? changed.length : index)}<span class="changed">${changed.slice(index < 0 ? changed.length : index, endIndex)}</span>${changed.slice(endIndex)}`;
+                let start = 0;
+                while (start < plain.length && start < changed.length && plain[start] === changed[start]) start += 1;
+                let plainEnd = plain.length;
+                let changedEnd = changed.length;
+                while (plainEnd > start && changedEnd > start && plain[plainEnd - 1] === changed[changedEnd - 1]) {
+                    plainEnd -= 1;
+                    changedEnd -= 1;
+                }
+                stemHTML = `${changed.slice(0, start)}<span class="changed">${changed.slice(start, changedEnd)}</span>${changed.slice(changedEnd)}`;
             }
             return `<span>${stemHTML}</span><span class="ending">${data.suffix}</span>`;
         }
