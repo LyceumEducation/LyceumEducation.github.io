@@ -2,6 +2,10 @@
 
 A sophisticated, interactive web application for mastering Spanish verb conjugation in the present indicative tense. Built for curious language learners who want to understand *why* verbs conjugate the way they do, not just memorize them.
 
+Conjugación is the first Lyceum Education product. Read the [Lyceum
+Education vision](docs/LYCEUM-VISION.md) for the ecosystem's product,
+learning-science, UX, brand, and platform principles.
+
 ---
 
 ## 🎯 Mission Statement
