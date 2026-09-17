@@ -46,10 +46,10 @@
 <body>
     <header class="wrap topbar">
         <a class="brand" href="index.html" aria-label="Lyceum Education home"><span class="brand-mark">L</span><span>Lyceum Education</span></a>
-        <nav aria-label="Primary navigation"><a href="tools.html">Tools</a><a href="method.html">Method</a><a class="nav-cta" href="conjugation_lab.html">Open Conjugation Lab</a></nav>
+        <nav aria-label="Primary navigation"><a href="tools.html">Tools</a><a href="method.html">Method</a><span data-auth-nav><a href="login.html">Log in</a><a class="nav-cta" href="signup.html">Sign up</a></span></nav>
     </header>
     <main>
-        <section class="wrap intro"><p class="kicker">01 — The labs</p><h1>Practice with <em>purpose.</em></h1><p>Focused instruments for Spanish learners who want to understand patterns, make fewer guesses, and feel more at home in the language.</p></section>
+        <section class="wrap intro"><p class="kicker">01 — The labs</p><div class="greeting" data-greeting hidden aria-live="polite"></div><h1>Practice with <em>purpose.</em></h1><p>Focused instruments for Spanish learners who want to understand patterns, make fewer guesses, and feel more at home in the language.</p></section>
         <section class="wrap tools" aria-labelledby="tools-title">
             <p class="number">Choose your starting point</p>
             <div class="tool-grid">
@@ -60,5 +60,7 @@
         </section>
     </main>
     <footer class="wrap"><div class="footer-row"><a class="brand" href="index.html"><span class="brand-mark">L</span><span>Lyceum Education</span></a><p>Tools for curious people. &copy; 2026 Lyceum Education.</p></div></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
 </body>
 </html>

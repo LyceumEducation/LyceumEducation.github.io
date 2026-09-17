@@ -88,7 +88,7 @@
         <nav aria-label="Primary navigation">
             <a href="tools.html">Tools</a>
             <a href="method.html">Method</a>
-            <a class="nav-cta" href="conjugation_lab.html">Open Conjugation Lab</a>
+            <span data-auth-nav><a href="login.html">Log in</a><a class="nav-cta" href="signup.html">Sign up</a></span>
         </nav>
     </header>
 
@@ -96,6 +96,7 @@
         <section class="wrap hero" aria-labelledby="hero-title">
             <div class="hero-copy">
                 <p class="kicker">A new school of learning</p>
+                <div class="greeting" data-greeting hidden aria-live="polite"></div>
                 <h1 id="hero-title">Learn<br>with <em>structure.</em></h1>
                 <p class="hero-text">Beautiful, precise tools for language and expression. Lyceum makes the invisible patterns of learning visible.</p>
                 <div class="hero-actions">
@@ -130,5 +131,7 @@
         </section>
     </main>
     <footer class="wrap"><div class="footer-row"><a class="brand" href="index.html"><span class="brand-mark">L</span><span>Lyceum Education</span></a><p>Tools for curious people. &copy; 2026 Lyceum Education.</p></div></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
 </body>
 </html>

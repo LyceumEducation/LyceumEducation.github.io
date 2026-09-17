@@ -101,7 +101,9 @@
     <main class="shell">
         <header>
             <div><a class="brand" href="index.html" aria-label="Lyceum Education home"><span class="brand-mark">L</span><span>Lyceum Education</span></a><div class="eyebrow">Spanish present tense</div><h1>Conjugation Lab<span class="title-dot">.</span></h1></div>
+            <nav class="lab-auth" aria-label="Account" data-auth-nav><a href="login.html">Log in</a><a href="signup.html">Sign up</a></nav>
         </header>
+        <div class="greeting" data-greeting hidden aria-live="polite"></div>
         <div class="layout">
             <section class="card workspace" aria-labelledby="engine-title">
                 <div class="heading"><h2 id="engine-title">Live conjugation engine</h2><span class="status">Ready</span></div>
@@ -125,6 +127,8 @@
         </div>
         <footer>© 2026 Lyceum Education · Built for curious language learners</footer>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
     <script>
         const endings = {
             ar: { yo: "o", tu: "as", el: "a", nos: "amos", vos: "áis", ellos: "an" },
@@ -672,6 +676,7 @@
 
         function run() {
             const data = conjugate(verb.value, subject.value, "present", "indicative");
+            if (!data.error && window.LyceumAuth) LyceumAuth.saveMemory({ lastVerb: verb.value.trim(), lastSubject: subject.value, lastWord: data.word });
             result.className = `result ${data.error ? "error" : data.ending}`;
             const word = document.querySelector("#word");
             word.classList.remove("answer-enter");
@@ -766,6 +771,16 @@
         });
 
         buildMatrix();
+        const savedMemory = window.LyceumAuth?.getMemory() || {};
+        if (savedMemory.lastVerb) verb.value = savedMemory.lastVerb;
+        if (savedMemory.lastSubject) {
+            subject.value = savedMemory.lastSubject;
+            const savedOption = document.querySelector(`.subject-option[data-value="${savedMemory.lastSubject}"]`);
+            if (savedOption) {
+                subjectTrigger.textContent = savedOption.textContent;
+                subjectTrigger.style.color = "var(--ink)";
+            }
+        }
     </script>
 </body>
 </html>

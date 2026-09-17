@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an account | Lyceum Education</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <main class="auth-shell">
+        <a class="brand" href="index.html"><span class="brand-mark">L</span><span>Lyceum Education</span></a>
+        <section class="auth-card">
+            <p class="eyebrow">Make it yours</p>
+            <h1>Build a practice memory.</h1>
+            <p class="auth-copy">Your name helps Lyceum greet you and your account keeps your learning close.</p>
+            <form id="signup-form">
+                <div class="form-grid"><div><label for="first-name">First name</label><input id="first-name" name="firstName" autocomplete="given-name" required></div><div><label for="last-name">Last name</label><input id="last-name" name="lastName" autocomplete="family-name" required></div></div>
+                <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required>
+                <label for="password">Password</label><input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+                <button class="primary-button" type="submit">Create account</button>
+            </form>
+            <div class="divider"><span>or</span></div>
+            <button class="google-button" id="google-signup" type="button">Continue with Google</button>
+            <p class="form-message" id="message" role="alert" hidden></p>
+            <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script>
+        const form = document.querySelector("#signup-form");
+        const message = document.querySelector("#message");
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+            try {
+                const data = new FormData(form);
+                await LyceumAuth.signUp({ firstName: data.get("firstName").trim(), lastName: data.get("lastName").trim(), email: data.get("email").trim(), password: data.get("password") });
+                LyceumAuth.showMessage(message, "Account created. Check your email to confirm it, then log in.", false);
+                form.reset();
+            } catch (error) { LyceumAuth.showMessage(message, error.message); }
+        });
+        document.querySelector("#google-signup").addEventListener("click", async () => {
+            try { await LyceumAuth.signInWithGoogle(); }
+            catch (error) { LyceumAuth.showMessage(message, error.message); }
+        });
+    </script>
+</body>
+</html>
