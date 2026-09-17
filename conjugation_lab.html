@@ -27,9 +27,8 @@
         body::after { position: fixed; z-index: -1; bottom: -100px; left: -80px; width: 260px; height: 260px; border: 2px solid var(--red); border-radius: 50%; content: ""; opacity: .18; }
         .shell { width: min(1160px, 100%); margin: auto; }
         header { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; min-height: 120px; margin-bottom: 26px; padding: 24px 0 22px; }
-        .home-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 700 .76rem "Space Grotesk", sans-serif; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; margin-bottom: 25px; }
-        .home-link::before { display: grid; place-items: center; width: 25px; height: 25px; border: 2px solid var(--ink); background: var(--acid); content: "L"; font-size: .78rem; transform: rotate(-6deg); }
-        .home-link:hover, .home-link:focus-visible { color: var(--blue); }
+        .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); font: 700 1.02rem "Space Grotesk", sans-serif; letter-spacing: -.04em; text-decoration: none; }
+        .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid var(--ink); background: var(--acid); font: 700 1rem "Space Grotesk"; transform: rotate(-6deg); }
         .eyebrow { color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; margin-bottom: 10px; }
         h1, h2, .word, .badge { font-family: "Space Grotesk", sans-serif; }
         h1 { font-size: clamp(3.5rem, 9vw, 7.8rem); line-height: .76; letter-spacing: -.105em; }
@@ -93,7 +92,7 @@
         :focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
         @keyframes answer-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes dot-bounce { 0% { transform: scaleY(1); } 35% { transform: scaleY(.35); } 65% { transform: scaleY(1.2); } 100% { transform: scaleY(1); } }
-        @media (max-width: 760px) { body { padding: 0 14px 25px; } header { display: block; min-height: 0; padding-top: 20px; } .home-link { margin-bottom: 23px; } .layout { grid-template-columns: 1fr; } .intro { margin-top: 14px; text-align: left; } }
+        @media (max-width: 760px) { body { padding: 0 14px 25px; } header { display: block; min-height: 0; padding-top: 20px; } .layout { grid-template-columns: 1fr; } .intro { margin-top: 14px; text-align: left; } }
         @media (max-width: 460px) { .controls { grid-template-columns: 1fr; } .card { padding: 21px; box-shadow: 5px 5px 0 var(--ink); } .submit-verb { width: 100%; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
     </style>
@@ -101,7 +100,7 @@
 <body>
     <main class="shell">
         <header>
-            <div><a class="home-link" href="index.html">Lyceum Education</a><div class="eyebrow">Spanish present tense</div><h1>Conjugation Lab<span class="title-dot">.</span></h1></div>
+            <div><a class="brand" href="index.html" aria-label="Lyceum Education home"><span class="brand-mark">L</span><span>Lyceum Education</span></a><div class="eyebrow">Spanish present tense</div><h1>Conjugation Lab<span class="title-dot">.</span></h1></div>
         </header>
         <div class="layout">
             <section class="card workspace" aria-labelledby="engine-title">
