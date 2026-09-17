@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Lyceum Education's focused tools for Spanish language learning.">
+    <title>Tools | Lyceum Education</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink:#111; --paper:#f4f0e8; --acid:#d7ff3f; --red:#ef4d3c; --blue:#3155db; --muted:#635f57; }
+        * { box-sizing:border-box; margin:0; }
+        body { color:var(--ink); background:var(--paper); font-family:"DM Sans",sans-serif; }
+        a { color:inherit; text-decoration:none; }
+        .wrap { width:min(1240px,calc(100% - 40px)); margin:auto; }
+        .topbar { display:flex; align-items:center; justify-content:space-between; min-height:88px; border-bottom:2px solid var(--ink); }
+        .brand { display:flex; align-items:center; gap:12px; font:700 1.02rem "Space Grotesk"; letter-spacing:-.04em; }
+        .brand-mark { display:grid; place-items:center; width:34px; height:34px; border:2px solid var(--ink); background:var(--acid); font:700 1rem "Space Grotesk"; transform:rotate(-6deg); }
+        nav { display:flex; align-items:center; gap:28px; font-size:.77rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+        nav a { position:relative; } nav a::after { position:absolute; right:0; bottom:-7px; left:0; height:2px; content:""; background:var(--red); transform:scaleX(0); transition:transform .2s ease; }
+        nav a:hover::after, nav a:focus-visible::after { transform:scaleX(1); }
+        .nav-cta { border:2px solid var(--ink); padding:11px 15px; background:var(--ink); color:var(--paper); }
+        .nav-cta:hover, .nav-cta:focus-visible { background:var(--acid); color:var(--ink); }
+        .intro { padding:94px 0 76px; border-bottom:2px solid var(--ink); }
+        .kicker, .number { color:var(--red); font:700 .74rem "Space Grotesk"; letter-spacing:.16em; text-transform:uppercase; }
+        h1, h2, h3 { font-family:"Space Grotesk"; letter-spacing:-.08em; }
+        h1 { max-width:850px; margin-top:22px; font-size:clamp(4rem,10vw,9rem); line-height:.8; }
+        h1 em { color:var(--blue); font-style:normal; }
+        .intro p { max-width:560px; margin-top:34px; color:var(--muted); font-size:1.08rem; line-height:1.6; }
+        .tools { padding:82px 0 100px; }
+        .tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:42px; }
+        .tool { min-height:330px; display:flex; flex-direction:column; justify-content:space-between; border:2px solid var(--ink); padding:25px; }
+        .tool:nth-child(1) { background:var(--acid); } .tool:nth-child(2) { background:var(--red); } .tool:nth-child(3) { background:#fff; }
+        .tool h2 { max-width:260px; margin-top:24px; font-size:2.6rem; line-height:.88; }
+        .tool p { max-width:290px; margin-top:18px; line-height:1.5; }
+        .tool-link { display:flex; justify-content:space-between; border-top:2px solid var(--ink); padding-top:14px; font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+        .tool:hover, .tool:focus-visible { transform:translate(-5px,-5px); box-shadow:8px 8px 0 var(--ink); }
+        footer { padding:30px 0 42px; border-top:2px solid var(--ink); }
+        .footer-row { display:flex; justify-content:space-between; gap:25px; font-size:.78rem; } .footer-row p { color:var(--muted); }
+        :focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+        @media (max-width:760px) { .wrap { width:min(100% - 28px,1240px); } nav a:not(.nav-cta) { display:none; } .intro { padding:70px 0 58px; } .tool-grid { grid-template-columns:1fr; } .footer-row { display:block; } .footer-row p { margin-top:12px; } }
+    </style>
+</head>
+<body>
+    <header class="wrap topbar">
+        <a class="brand" href="index.html" aria-label="Lyceum Education home"><span class="brand-mark">L</span><span>Lyceum Education</span></a>
+        <nav aria-label="Primary navigation"><a href="tools.html">Tools</a><a href="method.html">Method</a><a class="nav-cta" href="conjugation_lab.html">Open Conjugation Lab</a></nav>
+    </header>
+    <main>
+        <section class="wrap intro"><p class="kicker">01 — The labs</p><h1>Practice with <em>purpose.</em></h1><p>Focused instruments for Spanish learners who want to understand patterns, make fewer guesses, and feel more at home in the language.</p></section>
+        <section class="wrap tools" aria-labelledby="tools-title">
+            <p class="number">Choose your starting point</p>
+            <div class="tool-grid">
+                <a class="tool" href="conjugation_lab.html"><div><h2 id="tools-title">Conjugation Lab</h2><p>See the hidden rules inside present-tense verbs. Test a verb, choose a subject, and learn why the form changes.</p></div><span class="tool-link">Enter the lab <b>↗</b></span></a>
+                <div class="tool"><div><h2>Language Lab</h2><p>Build vocabulary, listening, reading, and writing habits around real Spanish and durable recall.</p></div><span class="tool-link">In development <b>+</b></span></div>
+                <div class="tool"><div><h2>Study Lab</h2><p>Turn notes and questions into retrieval practice that helps new language stay usable beyond the lesson.</p></div><span class="tool-link">In development <b>+</b></span></div>
+            </div>
+        </section>
+    </main>
+    <footer class="wrap"><div class="footer-row"><a class="brand" href="index.html"><span class="brand-mark">L</span><span>Lyceum Education</span></a><p>Tools for curious people. &copy; 2026 Lyceum Education.</p></div></footer>
+</body>
+</html>

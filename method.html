@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how Lyceum Education designs software for clear, capable Spanish learning.">
+    <title>Method | Lyceum Education</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink:#111; --paper:#f4f0e8; --acid:#d7ff3f; --red:#ef4d3c; --blue:#3155db; --muted:#635f57; }
+        * { box-sizing:border-box; margin:0; }
+        body { color:var(--ink); background:var(--paper); font-family:"DM Sans",sans-serif; }
+        a { color:inherit; text-decoration:none; } .wrap { width:min(1240px,calc(100% - 40px)); margin:auto; }
+        .topbar { display:flex; align-items:center; justify-content:space-between; min-height:88px; border-bottom:2px solid var(--ink); }
+        .brand { display:flex; align-items:center; gap:12px; font:700 1.02rem "Space Grotesk"; letter-spacing:-.04em; }
+        .brand-mark { display:grid; place-items:center; width:34px; height:34px; border:2px solid var(--ink); background:var(--acid); font:700 1rem "Space Grotesk"; transform:rotate(-6deg); }
+        nav { display:flex; align-items:center; gap:28px; font-size:.77rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+        nav a { position:relative; } nav a::after { position:absolute; right:0; bottom:-7px; left:0; height:2px; content:""; background:var(--red); transform:scaleX(0); transition:transform .2s ease; }
+        nav a:hover::after, nav a:focus-visible::after { transform:scaleX(1); }
+        .nav-cta { border:2px solid var(--ink); padding:11px 15px; background:var(--ink); color:var(--paper); } .nav-cta:hover, .nav-cta:focus-visible { background:var(--acid); color:var(--ink); }
+        .hero { padding:94px 0 86px; border-bottom:2px solid var(--ink); }
+        .kicker, .number { color:var(--red); font:700 .74rem "Space Grotesk"; letter-spacing:.16em; text-transform:uppercase; }
+        h1, h2 { font-family:"Space Grotesk"; letter-spacing:-.09em; }
+        h1 { max-width:1000px; margin-top:22px; font-size:clamp(3.7rem,9vw,8.5rem); line-height:.82; }
+        h1 span, h2 span { color:var(--blue); } .hero p { max-width:650px; margin-top:35px; color:var(--muted); font-size:1.1rem; line-height:1.65; }
+        .principles { padding:82px 0 100px; } .principles-head { display:grid; grid-template-columns:1fr 1fr; gap:10%; align-items:end; }
+        h2 { max-width:650px; font-size:clamp(2.8rem,6vw,6.3rem); line-height:.87; } .principles-intro { color:var(--muted); font-size:1rem; line-height:1.6; }
+        .principle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:52px; }
+        .principle { min-height:270px; border:2px solid var(--ink); padding:25px; } .principle:nth-child(1) { background:var(--acid); } .principle:nth-child(2) { background:var(--red); } .principle:nth-child(3) { background:var(--blue); color:var(--paper); }
+        .principle h3 { margin-top:62px; font:700 2rem/ .9 "Space Grotesk"; letter-spacing:-.07em; } .principle p { margin-top:16px; line-height:1.5; }
+        .process { border-top:2px solid var(--ink); padding:78px 0 96px; } .process-grid { display:grid; grid-template-columns:1fr 1fr; gap:10%; margin-top:45px; }
+        .step { display:grid; grid-template-columns:55px 1fr; gap:18px; padding:22px 0; border-top:2px solid var(--ink); } .step strong { font:700 1.7rem "Space Grotesk"; } .step h3 { font:700 1.35rem "Space Grotesk"; letter-spacing:-.04em; } .step p { margin-top:8px; color:var(--muted); line-height:1.5; }
+        footer { padding:30px 0 42px; border-top:2px solid var(--ink); } .footer-row { display:flex; justify-content:space-between; gap:25px; font-size:.78rem; } .footer-row p { color:var(--muted); }
+        :focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+        @media (max-width:760px) { .wrap { width:min(100% - 28px,1240px); } nav a:not(.nav-cta) { display:none; } .hero { padding:70px 0; } .principles-head, .process-grid { grid-template-columns:1fr; gap:25px; } .principle-grid { grid-template-columns:1fr; } .footer-row { display:block; } .footer-row p { margin-top:12px; } }
+    </style>
+</head>
+<body>
+    <header class="wrap topbar">
+        <a class="brand" href="index.html" aria-label="Lyceum Education home"><span class="brand-mark">L</span><span>Lyceum Education</span></a>
+        <nav aria-label="Primary navigation"><a href="tools.html">Tools</a><a href="method.html">Method</a><a class="nav-cta" href="conjugation_lab.html">Open Conjugation Lab</a></nav>
+    </header>
+    <main>
+        <section class="wrap hero"><p class="kicker">02 — The method</p><h1>¡<span>Bienvenidos</span>!</h1><p>Lyceum is built around a simple mission: bring functionality, clarity of mind, and ease to Spanish language learning. The software should make the next useful step obvious.</p></section>
+        <section class="wrap principles" aria-labelledby="principles-title">
+            <div class="principles-head"><h2 id="principles-title">Less friction.<br>More <span>knowing.</span></h2><p class="principles-intro">Learning software should not compete with the thing you are trying to learn. We design calm, focused experiences that expose the structure behind Spanish so practice feels purposeful instead of noisy.</p></div>
+            <div class="principle-grid">
+                <article class="principle"><p class="number">01</p><h3>Function first</h3><p>Every interaction earns its place. Tools help you practice a real skill, see a useful result, or take a clear next step.</p></article>
+                <article class="principle"><p class="number">02</p><h3>Clarity by design</h3><p>We turn hidden patterns into visible feedback, so mistakes become information and difficult ideas become workable.</p></article>
+                <article class="principle"><p class="number">03</p><h3>Ease to return</h3><p>Good learning software welcomes another attempt. It keeps the interface light, the language human, and the progress meaningful.</p></article>
+            </div>
+        </section>
+        <section class="process"><div class="wrap"><p class="number">How we build</p><div class="process-grid"><h2>Designed for<br>real <span>learners.</span></h2><div><div class="step"><strong>01</strong><div><h3>Find the pattern</h3><p>We start with the underlying language system, not a decorative feature list.</p></div></div><div class="step"><strong>02</strong><div><h3>Make it usable</h3><p>We shape that system into a focused interaction with clear inputs, readable feedback, and room to think.</p></div></div><div class="step"><strong>03</strong><div><h3>Refine the return</h3><p>We test whether the experience makes practice easier to begin, easier to understand, and easier to repeat.</p></div></div></div></div></div></section>
+    </main>
+    <footer class="wrap"><div class="footer-row"><a class="brand" href="index.html"><span class="brand-mark">L</span><span>Lyceum Education</span></a><p>Tools for curious people. &copy; 2026 Lyceum Education.</p></div></footer>
+</body>
+</html>
