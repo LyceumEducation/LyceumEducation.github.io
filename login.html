@@ -15,16 +15,13 @@
             <p class="auth-copy">Log in to keep your learning history and preferences with you.</p>
             <form id="login-form">
                 <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required>
-                <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required>
+                <label for="password">Password</label><div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" required><button class="password-toggle" type="button" data-password-toggle="#password">Show</button></div>
                 <button class="primary-button" type="submit">Log in</button>
             </form>
-            <div class="divider"><span>or</span></div>
-            <button class="google-button" id="google-login" type="button">Continue with Google</button>
             <p class="form-message" id="message" role="alert" hidden></p>
             <p class="auth-switch">New to Lyceum? <a href="signup.html">Create an account</a></p>
         </section>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js"></script>
     <script>
         const form = document.querySelector("#login-form");
@@ -36,9 +33,10 @@
                 window.location.href = "index.html";
             } catch (error) { LyceumAuth.showMessage(message, error.message); }
         });
-        document.querySelector("#google-login").addEventListener("click", async () => {
-            try { await LyceumAuth.signInWithGoogle(); }
-            catch (error) { LyceumAuth.showMessage(message, error.message); }
+        document.querySelector("[data-password-toggle]").addEventListener("click", event => {
+            const input = document.querySelector(event.currentTarget.dataset.passwordToggle);
+            input.type = input.type === "password" ? "text" : "password";
+            event.currentTarget.textContent = input.type === "password" ? "Show" : "Hide";
         });
     </script>
 </body>

@@ -14,13 +14,12 @@ label { display:block; margin:16px 0 7px 2px; font-size:.7rem; font-weight:700; 
 input { width:100%; border:2px solid var(--ink); padding:13px; background:#fffdf8; color:var(--ink); font:600 1rem "DM Sans",Arial,sans-serif; }
 input:focus { outline:3px solid var(--blue); outline-offset:2px; }
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.primary-button,.google-button { width:100%; margin-top:22px; border:2px solid var(--ink); padding:14px; cursor:pointer; font:700 .76rem "DM Sans",Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+.primary-button { width:100%; margin-top:22px; border:2px solid var(--ink); padding:14px; cursor:pointer; font:700 .76rem "DM Sans",Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
 .primary-button { color:var(--paper); background:var(--ink); }
 .primary-button:hover { background:var(--blue); }
-.google-button { margin-top:0; background:var(--acid); }
-.google-button:hover { background:var(--red); }
-.divider { display:flex; align-items:center; gap:12px; margin:25px 0 14px; color:var(--muted); font-size:.76rem; text-transform:uppercase; }
-.divider::before,.divider::after { flex:1; height:1px; content:""; background:#bbb5aa; }
+.password-field { position:relative; }
+.password-field input { padding-right:72px; }
+.password-toggle { position:absolute; top:50%; right:8px; border:0; background:transparent; color:var(--blue); cursor:pointer; font:700 .7rem "DM Sans",Arial,sans-serif; text-transform:uppercase; transform:translateY(-50%); }
 .form-message { margin-top:18px; padding:12px; border:2px solid var(--ink); background:var(--acid); font-size:.88rem; line-height:1.4; }
 .form-message.error { background:#ffd9d3; }
 .auth-switch { margin-top:25px; color:var(--muted); font-size:.88rem; text-align:center; }

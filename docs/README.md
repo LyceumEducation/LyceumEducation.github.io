@@ -8,26 +8,15 @@ learning-science, UX, brand, and platform principles.
 
 ## Accounts and memory
 
-The site remains a static GitHub Pages site and does not run Python. Account
-creation and login use [Supabase Auth](https://supabase.com/docs/guides/auth),
-with email/password and Google OAuth. The browser integration lives in
-[`auth.js`](../auth.js), and the public project URL and anon key must be added
-there before deploying. The anon key is safe for browser use; never add a
-Supabase service-role key.
-
-In Supabase:
-
-1. Enable Email in **Authentication → Providers**.
-2. Enable Google and add the Google OAuth client credentials.
-3. Add the deployed site URL and `login.html`/`signup.html` callback URLs in
-   **Authentication → URL Configuration**.
-
-The account's first and last names are stored in Supabase user metadata. The
-site uses `localStorage` as a small offline-friendly memory layer for the last
-Conjugation Lab verb, subject, and result. This lets the current static site
-remember a learner after reload without claiming that local browser data is
-synced across devices. Cross-device learning history should be added later
-with a protected Supabase table and Row Level Security policies.
+The site remains a static GitHub Pages site and does not run Python or require
+an external authentication setup. Account creation and login use a
+browser-local account store in [`auth.js`](../auth.js), with SHA-256 password
+hashes, profile names, a persistent session, and reload-safe memory. Successful
+signup logs the learner into the home page immediately. This is appropriate for
+a prototype or single-device experience; it is not a replacement for a
+server-backed account system or cross-device identity. Google login was
+intentionally removed rather than presenting a button that could not work
+without an OAuth provider.
 
 ---
 
