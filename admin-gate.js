@@ -60,10 +60,8 @@
             const line = document.createElement("p");
             line.className = "terminal-response";
             if (/^\d{5}$/.test(value)) {
-                line.textContent = value === "31013" ? "Access code accepted. Enter command: APERTA" : "Access denied. Enter the five-digit access code.";
-            } else if (value === "APERTA") {
-                line.textContent = "Code acknowledged. Verification required before opening Administrator Dashboard. What is the security clearance?";
-            } else if (value === "CLEARANCE: APLHA-ALPHA-ONE-ONE. GARNSEY." || value === "CLEARANCE: ALPHA-ALPHA-ONE-ONE. GARNSEY.") {
+                line.textContent = value === "31013" ? "Access code accepted. Enter security clearance." : "Access denied. Enter the five-digit access code.";
+            } else if (value === "GARNSEY.") {
                 line.textContent = "Clearance accepted. Opening Administrator Dashboard…";
                 sessionStorage.setItem("lyceum.adminClearance", "granted");
                 setTimeout(() => { window.location.href = "admin.html"; }, 500);

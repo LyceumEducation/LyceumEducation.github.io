@@ -18,15 +18,17 @@
                 <button data-view="classwork">Classwork</button>
                 <button data-view="people">People</button>
                 <button data-view="grades">Grades</button>
+                <button data-view="messages">Direct messages</button>
+                <button data-view="notifications">Notifications <span class="nav-dot" id="notification-dot" hidden></span></button>
             </nav>
             <button class="sign-out" id="sign-out">Sign out</button>
         </aside>
         <main class="workspace">
-            <header class="topbar"><div><p class="overline" id="workspace-label">CLASSROOM</p><h1 id="page-title">Your dashboard</h1></div><div class="top-actions"><button class="outline-button" id="new-action">+ New</button><a class="home-link" href="index.html">Lyceum home ↗</a></div></header>
+            <header class="topbar"><div><p class="overline" id="workspace-label">CLASSROOM</p><h1 id="page-title">Your dashboard</h1></div><div class="top-actions"><button class="outline-button" id="exit-view" hidden>Exit view as</button><button class="outline-button" id="new-action">+ New</button><a class="home-link" href="index.html">Lyceum home ↗</a></div></header>
             <div class="content" id="content"></div>
         </main>
     </div>
-    <div class="chat-bubble" id="chat-bubble"><button aria-label="Open messages">✦</button><span id="chat-count" hidden></span></div>
+    <div class="chat-bubble" id="chat-bubble"><button aria-label="Open Lyceum messages">✦</button><span id="chat-count" hidden></span></div>
     <aside class="chat-panel" id="chat-panel" hidden><div class="chat-header"><strong>Lyceum messages</strong><button id="close-chat" aria-label="Close messages">×</button></div><div class="chat-list" id="chat-list"></div><form id="chat-form"><input name="message" placeholder="Write a reply…" required><button>Send</button></form></aside>
     <script src="auth.js"></script>
     <script src="classroom.js"></script>

@@ -49,7 +49,7 @@
         tools: ["#tools"],
         messages: ["#messages"],
     }[page] || ["#overview", "#activity", "#tools"];
-    ["#overview", "#accounts", "#activity", "#tools"].forEach(selector => {
+    ["#overview", "#accounts", "#activity", "#tools", "#messages"].forEach(selector => {
         const element = document.querySelector(selector);
         if (element) element.classList.toggle("admin-view-hidden", !visibleSelectors.includes(selector));
     });
@@ -82,7 +82,7 @@
         const lastName = String(profile.lastName || "");
         const initials = `${firstName[0] || ""}${lastName[0] || ""}`.toUpperCase();
         const joined = profile.createdAt ? new Date(profile.createdAt).toLocaleDateString() : "Local account";
-        return `<tr><td><span class="user-cell"><span class="user-avatar">${escapeHTML(initials)}</span> ${escapeHTML(firstName)} ${escapeHTML(lastName)}</span></td><td>${escapeHTML(profile.email || "")}</td><td><span class="pill">${escapeHTML(profile.role || "student")}</span></td><td>${escapeHTML(joined)}</td><td>${escapeHTML(formatLastActive(profile.lastActive))}</td><td><button class="account-delete" data-account-email="${escapeHTML(profile.email || "")}" type="button">Delete</button></td></tr>`;
+        return `<tr><td><span class="user-cell"><span class="user-avatar">${escapeHTML(initials)}</span> ${escapeHTML(firstName)} ${escapeHTML(lastName)}</span></td><td>${escapeHTML(profile.email || "")}</td><td><span class="pill">${escapeHTML(profile.role || "student")}</span></td><td>${escapeHTML(joined)}</td><td>${escapeHTML(formatLastActive(profile.lastActive))}</td><td><button class="account-view" data-account-email="${escapeHTML(profile.email || "")}" type="button">View as</button> <button class="account-delete" data-account-email="${escapeHTML(profile.email || "")}" type="button">Delete</button></td></tr>`;
     }).join("");
     const tableBody = document.querySelector("#accounts tbody");
     const accountTotal = document.querySelector("#account-total");
@@ -91,6 +91,11 @@
     if (accountTotal) accountTotal.textContent = `${accounts.length} total · metadata only`;
     if (metricTotal) metricTotal.textContent = accounts.length.toLocaleString();
     document.querySelectorAll("[data-account-email]").forEach(button => button.addEventListener("click", () => {
+        if (button.classList.contains("account-view")) {
+            sessionStorage.setItem("lyceum.viewAs", button.dataset.accountEmail);
+            window.location.href = "classroom.html";
+            return;
+        }
         if (!window.confirm(`Delete ${button.dataset.accountEmail}? This cannot be undone.`)) return;
         const next = readAccounts();
         delete next[button.dataset.accountEmail];
@@ -102,10 +107,11 @@
     const messageHistory = document.querySelector("#admin-message-history");
     const messages = (() => { try { return JSON.parse(localStorage.getItem("lyceum.messages") || "[]"); } catch { return []; } })();
     if (messageHistory) messageHistory.innerHTML = messages.length ? messages.slice().reverse().map(message => `<div class="admin-message-row"><strong>${escapeHTML(message.to === "all" ? "All accounts" : message.to)}</strong><span>${escapeHTML(message.body)}</span><small>${new Date(message.at).toLocaleString()}</small></div>`).join("") : '<p class="panel-note">No messages have been sent.</p>';
+    document.querySelectorAll("[data-message-command]").forEach(button => button.addEventListener("click", () => document.execCommand(button.dataset.messageCommand, false)));
     document.querySelector("#admin-message-form")?.addEventListener("submit", event => {
         event.preventDefault();
         const next = (() => { try { return JSON.parse(localStorage.getItem("lyceum.messages") || "[]"); } catch { return []; } })();
-        next.push({ id: `message-${Date.now()}`, from: "admin", to: recipient.value, body: document.querySelector("#message-body").value.trim(), at: new Date().toISOString(), read: false });
+        next.push({ id: `message-${Date.now()}`, from: "admin", to: recipient.value, body: document.querySelector("#message-body").innerHTML.trim(), at: new Date().toISOString(), read: false });
         localStorage.setItem("lyceum.messages", JSON.stringify(next));
         window.location.reload();
     });

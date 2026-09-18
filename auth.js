@@ -92,6 +92,18 @@
         rememberProfile(account.profile);
     }
 
+    async function resetPassword(email, password) {
+        const normalizedEmail = email.trim().toLowerCase();
+        const accounts = read(ACCOUNTS_KEY, {});
+        const account = accounts[normalizedEmail];
+        if (!account) throw new Error("No account was found for that email.");
+        if (!password || password.length < 8) throw new Error("Use a password with at least 8 characters.");
+        account.passwordHash = await hashPassword(password);
+        account.profile.lastActive = new Date().toISOString();
+        accounts[normalizedEmail] = account;
+        localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
+    }
+
     function signOut() {
         rememberProfile(null);
         window.location.href = "index.html";
@@ -134,6 +146,7 @@
         getProfile: localProfile,
         signUp,
         signIn,
+        resetPassword,
         signOut,
         showMessage,
         getMemory: () => read(MEMORY_KEY, {}),

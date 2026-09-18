@@ -61,6 +61,10 @@ td:first-child, th:first-child { padding-left:0; }
 .admin-message-row { display:grid; grid-template-columns:minmax(150px,.4fr) 1fr auto; gap:12px; align-items:center; border-top:1px solid var(--line); padding:12px 0; font-size:.8rem; }
 .admin-message-row small { color:var(--muted); font-size:.68rem; }
 .account-delete { border:0; color:var(--red); background:transparent; cursor:pointer; font-size:.72rem; font-weight:700; }
+.account-view { border:0; color:var(--blue); background:transparent; cursor:pointer; font-size:.72rem; font-weight:700; }
+.message-editor-tools { display:flex; gap:5px; }
+.message-editor-tools button { border:1px solid var(--line); padding:6px 9px; background:var(--panel); cursor:pointer; }
+.message-editor { min-height:110px; border:1px solid var(--line); padding:11px; background:var(--panel); white-space:pre-wrap; }
 .terminal-backdrop { position:fixed; z-index:20; inset:0; display:grid; place-items:center; padding:20px; background:rgba(8,11,15,.84); }
 .terminal-backdrop[hidden] { display:none; }
 .admin-terminal { width:min(760px,100%); overflow:hidden; border:1px solid #4a5565; border-radius:7px; background:#0d1117; box-shadow:0 25px 80px #000; color:#f3f6f1; font:400 .87rem/1.6 "Space Mono",monospace; }
