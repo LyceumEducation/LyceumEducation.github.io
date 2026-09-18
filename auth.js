@@ -53,11 +53,12 @@
             }
         }
 
-        function trackEvent(type, data = {}) {
-            const analytics = read(ANALYTICS_KEY, { pageViews: {}, daily: {}, sessions: 0, events: [] });
-            analytics.events = [...analytics.events.slice(-199), { type, ...data, at: new Date().toISOString() }];
-            localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
-        }
+    }
+
+    function trackEvent(type, data = {}) {
+        const analytics = read(ANALYTICS_KEY, { pageViews: {}, daily: {}, sessions: 0, events: [] });
+        analytics.events = [...analytics.events.slice(-199), { type, ...data, at: new Date().toISOString() }];
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
     }
 
     async function hashPassword(password) {
@@ -66,12 +67,13 @@
         return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
     }
 
-    async function signUp({ firstName, lastName, email, password }) {
+    async function signUp({ firstName, lastName, email, password, role = "student" }) {
         const normalizedEmail = email.trim().toLowerCase();
         const accounts = read(ACCOUNTS_KEY, {});
         if (accounts[normalizedEmail]) throw new Error("An account with this email already exists. Try logging in.");
+        if (!["student", "educator", "guardian"].includes(role)) throw new Error("Choose a valid account type.");
         const now = new Date().toISOString();
-        const profile = { id: `local-${Date.now()}`, email: normalizedEmail, firstName: firstName.trim(), lastName: lastName.trim(), createdAt: now, lastActive: now };
+        const profile = { id: `local-${Date.now()}`, email: normalizedEmail, firstName: firstName.trim(), lastName: lastName.trim(), role, createdAt: now, lastActive: now };
         accounts[normalizedEmail] = { profile, passwordHash: await hashPassword(password) };
         localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
         rememberProfile(profile);
@@ -106,7 +108,7 @@
         document.querySelectorAll("[data-auth-nav]").forEach(nav => {
             const profile = localProfile();
             nav.innerHTML = profile
-                ? `<span class="auth-greeting">¡Hola, ${escapeHTML(profile.firstName)}!</span><button class="auth-link" type="button" data-sign-out>Sign out</button>`
+                ? `<span class="auth-greeting">¡Hola, ${escapeHTML(profile.firstName)}!</span><a class="auth-link" href="classroom.html">Dashboard</a><button class="auth-link" type="button" data-sign-out>Sign out</button>`
                 : '<a class="auth-link" href="login.html">Log in</a><a class="auth-button" href="signup.html">Sign up</a>';
             nav.querySelector("[data-sign-out]")?.addEventListener("click", signOut);
         });
@@ -129,6 +131,7 @@
 
     window.LyceumAuth = {
         getUser: async () => localProfile(),
+        getProfile: localProfile,
         signUp,
         signIn,
         signOut,

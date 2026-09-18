@@ -53,6 +53,14 @@ td:first-child, th:first-child { padding-left:0; }
 .pill { display:inline-block; border:1px solid #b7d68a; padding:4px 7px; color:#28714f; background:#edf8d9; font:700 .62rem "Space Mono"; }
 .safe-note { margin-top:18px; padding:12px; border-left:3px solid var(--blue); background:#edf0ff; color:#40475d; font-size:.76rem; line-height:1.5; }
 .admin-view-hidden { display:none !important; }
+.admin-message-form { display:grid; gap:10px; max-width:620px; }
+.admin-message-form select, .admin-message-form textarea { border:1px solid var(--line); padding:11px; background:#fffdf8; font:inherit; }
+.admin-message-form textarea { min-height:110px; resize:vertical; }
+.admin-send { width:max-content; border:2px solid var(--ink); padding:11px 15px; color:#fff; background:var(--ink); font-weight:700; cursor:pointer; }
+.message-history { display:grid; gap:9px; margin-top:24px; }
+.admin-message-row { display:grid; grid-template-columns:minmax(150px,.4fr) 1fr auto; gap:12px; align-items:center; border-top:1px solid var(--line); padding:12px 0; font-size:.8rem; }
+.admin-message-row small { color:var(--muted); font-size:.68rem; }
+.account-delete { border:0; color:var(--red); background:transparent; cursor:pointer; font-size:.72rem; font-weight:700; }
 .terminal-backdrop { position:fixed; z-index:20; inset:0; display:grid; place-items:center; padding:20px; background:rgba(8,11,15,.84); }
 .terminal-backdrop[hidden] { display:none; }
 .admin-terminal { width:min(760px,100%); overflow:hidden; border:1px solid #4a5565; border-radius:7px; background:#0d1117; box-shadow:0 25px 80px #000; color:#f3f6f1; font:400 .87rem/1.6 "Space Mono",monospace; }

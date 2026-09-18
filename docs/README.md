@@ -12,8 +12,11 @@ The site remains a static GitHub Pages site and does not run Python or require
 an external authentication setup. Account creation and login use a
 browser-local account store in [`auth.js`](../auth.js), with SHA-256 password
 hashes, profile names, a persistent session, and reload-safe memory. Successful
-signup logs the learner into the home page immediately. This is appropriate for
-a prototype or single-device experience; it is not a replacement for a
+signup logs the user into the classroom dashboard immediately. Accounts can be
+created as students, educators, or guardians. The classroom workspace stores
+classes, announcements, assignments, submissions, grades, guardian links, and
+prototype admin messages in the same browser-local store. This is appropriate
+for a prototype or single-device experience; it is not a replacement for a
 server-backed account system or cross-device identity. Google login was
 intentionally removed rather than presenting a button that could not work
 without an OAuth provider.

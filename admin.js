@@ -47,6 +47,7 @@
         accounts: ["#accounts"],
         activity: ["#activity"],
         tools: ["#tools"],
+        messages: ["#messages"],
     }[page] || ["#overview", "#activity", "#tools"];
     ["#overview", "#accounts", "#activity", "#tools"].forEach(selector => {
         const element = document.querySelector(selector);
@@ -81,7 +82,7 @@
         const lastName = String(profile.lastName || "");
         const initials = `${firstName[0] || ""}${lastName[0] || ""}`.toUpperCase();
         const joined = profile.createdAt ? new Date(profile.createdAt).toLocaleDateString() : "Local account";
-        return `<tr><td><span class="user-cell"><span class="user-avatar">${escapeHTML(initials)}</span> ${escapeHTML(firstName)} ${escapeHTML(lastName)}</span></td><td>${escapeHTML(profile.email || "")}</td><td>${escapeHTML(joined)}</td><td>${escapeHTML(formatLastActive(profile.lastActive))}</td><td><span class="pill">Active</span></td></tr>`;
+        return `<tr><td><span class="user-cell"><span class="user-avatar">${escapeHTML(initials)}</span> ${escapeHTML(firstName)} ${escapeHTML(lastName)}</span></td><td>${escapeHTML(profile.email || "")}</td><td><span class="pill">${escapeHTML(profile.role || "student")}</span></td><td>${escapeHTML(joined)}</td><td>${escapeHTML(formatLastActive(profile.lastActive))}</td><td><button class="account-delete" data-account-email="${escapeHTML(profile.email || "")}" type="button">Delete</button></td></tr>`;
     }).join("");
     const tableBody = document.querySelector("#accounts tbody");
     const accountTotal = document.querySelector("#account-total");
@@ -89,6 +90,25 @@
     if (tableBody && rows.length) tableBody.innerHTML = rows;
     if (accountTotal) accountTotal.textContent = `${accounts.length} total · metadata only`;
     if (metricTotal) metricTotal.textContent = accounts.length.toLocaleString();
+    document.querySelectorAll("[data-account-email]").forEach(button => button.addEventListener("click", () => {
+        if (!window.confirm(`Delete ${button.dataset.accountEmail}? This cannot be undone.`)) return;
+        const next = readAccounts();
+        delete next[button.dataset.accountEmail];
+        localStorage.setItem("lyceum.accounts", JSON.stringify(next));
+        window.location.reload();
+    }));
+    const recipient = document.querySelector("#message-recipient");
+    if (recipient) recipient.insertAdjacentHTML("beforeend", accounts.map(account => `<option value="${escapeHTML(account.profile.email)}">${escapeHTML(account.profile.firstName)} ${escapeHTML(account.profile.lastName)} · ${escapeHTML(account.profile.role || "student")}</option>`).join(""));
+    const messageHistory = document.querySelector("#admin-message-history");
+    const messages = (() => { try { return JSON.parse(localStorage.getItem("lyceum.messages") || "[]"); } catch { return []; } })();
+    if (messageHistory) messageHistory.innerHTML = messages.length ? messages.slice().reverse().map(message => `<div class="admin-message-row"><strong>${escapeHTML(message.to === "all" ? "All accounts" : message.to)}</strong><span>${escapeHTML(message.body)}</span><small>${new Date(message.at).toLocaleString()}</small></div>`).join("") : '<p class="panel-note">No messages have been sent.</p>';
+    document.querySelector("#admin-message-form")?.addEventListener("submit", event => {
+        event.preventDefault();
+        const next = (() => { try { return JSON.parse(localStorage.getItem("lyceum.messages") || "[]"); } catch { return []; } })();
+        next.push({ id: `message-${Date.now()}`, from: "admin", to: recipient.value, body: document.querySelector("#message-body").value.trim(), at: new Date().toISOString(), read: false });
+        localStorage.setItem("lyceum.messages", JSON.stringify(next));
+        window.location.reload();
+    });
     updateClock();
     window.setInterval(updateClock, 1000);
 })();

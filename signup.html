@@ -12,10 +12,16 @@
         <section class="auth-card">
             <p class="eyebrow">Make it yours</p>
             <h1>Build a practice memory.</h1>
-            <p class="auth-copy">Your name helps Lyceum greet you and your account keeps your learning close.</p>
+            <p class="auth-copy">Choose the workspace that matches your role. You can join a class or connect a guardian account after signing up.</p>
             <form id="signup-form">
                 <div class="form-grid"><div><label for="first-name">First name</label><input id="first-name" name="firstName" autocomplete="given-name" required></div><div><label for="last-name">Last name</label><input id="last-name" name="lastName" autocomplete="family-name" required></div></div>
                 <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required>
+                <label for="role">I am signing up as</label>
+                <select id="role" name="role" required>
+                    <option value="student">Student</option>
+                    <option value="educator">Educator</option>
+                    <option value="guardian">Guardian</option>
+                </select>
                 <label for="password">Password</label><div class="password-field"><input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required><button class="password-toggle" type="button" data-password-toggle="#password">Show</button></div>
                 <button class="primary-button" type="submit">Create account</button>
             </form>
@@ -31,8 +37,8 @@
             event.preventDefault();
             try {
                 const data = new FormData(form);
-                await LyceumAuth.signUp({ firstName: data.get("firstName"), lastName: data.get("lastName"), email: data.get("email"), password: data.get("password") });
-                window.location.href = "index.html";
+                await LyceumAuth.signUp({ firstName: data.get("firstName"), lastName: data.get("lastName"), email: data.get("email"), password: data.get("password"), role: data.get("role") });
+                window.location.href = "classroom.html";
             } catch (error) { LyceumAuth.showMessage(message, error.message); }
         });
         document.querySelector("[data-password-toggle]").addEventListener("click", event => {
