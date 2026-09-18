@@ -14,25 +14,25 @@
             <a class="brand" href="index.html"><span class="brand-mark">L</span><span>Lyceum Admin</span></a>
             <p class="admin-label">Workspace</p>
             <nav class="side-nav" aria-label="Dashboard navigation">
-                <a class="active" href="#overview">Overview</a><a href="#accounts">Accounts</a><a href="#tools">Tools &amp; labs</a><a href="#activity">Activity log</a>
+                <a data-admin-page="overview" href="admin.html?page=overview">Overview</a><a data-admin-page="accounts" href="admin.html?page=accounts">Accounts</a><a data-admin-page="tools" href="admin.html?page=tools">Tools &amp; labs</a><a data-admin-page="activity" href="admin.html?page=activity">Activity log</a>
             </nav>
             <p class="sidebar-footer"><span class="status-dot"></span>All systems operational<br><br>Prototype console<br>Data refresh: live</p>
         </aside>
         <main class="dashboard">
             <header class="dashboard-header">
-                <div><p class="overline">Administrator / overview</p><h1>Good morning, operator.</h1></div>
-                <div class="header-meta"><span>18 Sep 2026 · 12:39 UTC</span><span class="avatar">AD</span></div>
+                <div><p class="overline">Administrator / <span id="page-label">overview</span></p><h1>Good morning, operator.</h1></div>
+                <div class="header-meta"><span id="live-clock">Loading time…</span><span class="avatar">AD</span></div>
             </header>
             <div class="dashboard-content">
                 <section id="overview" class="metric-grid" aria-label="Key metrics">
                     <article class="metric"><p class="metric-label">Total learners</p><p class="metric-value" id="metric-total">2,481</p><p class="metric-change">↗ 12.4% this month</p></article>
-                    <article class="metric"><p class="metric-label">Active this week</p><p class="metric-value">1,806</p><p class="metric-change">↗ 8.1% this month</p></article>
-                    <article class="metric"><p class="metric-label">Practice sessions</p><p class="metric-value">14,290</p><p class="metric-change">↗ 18.7% this month</p></article>
-                    <article class="metric"><p class="metric-label">Completion rate</p><p class="metric-value">68.4%</p><p class="metric-change">↗ 3.2% this month</p></article>
+                    <article class="metric"><p class="metric-label">Active learners</p><p class="metric-value" id="metric-active">0</p><p class="metric-change">Based on last 7 days</p></article>
+                    <article class="metric"><p class="metric-label">Page views</p><p class="metric-value" id="metric-views">0</p><p class="metric-change">Tracked locally</p></article>
+                    <article class="metric"><p class="metric-label">Practice runs</p><p class="metric-value" id="metric-practice">0</p><p class="metric-change">Recorded tool events</p></article>
                 </section>
                 <section class="dashboard-grid">
-                    <article id="activity" class="panel"><div class="panel-heading"><h2>Practice activity</h2><span class="panel-note">Last 7 days</span></div><div class="bar-chart" aria-label="Practice activity by day"><i class="bar" style="--height:42%"><span>Mon</span></i><i class="bar" style="--height:68%"><span>Tue</span></i><i class="bar" style="--height:55%"><span>Wed</span></i><i class="bar" style="--height:84%"><span>Thu</span></i><i class="bar" style="--height:72%"><span>Fri</span></i><i class="bar" style="--height:96%"><span>Sat</span></i><i class="bar" style="--height:63%"><span>Sun</span></i></div></article>
-                    <article id="tools" class="panel"><div class="panel-heading"><h2>Tools</h2><span class="panel-note">Usage share</span></div><div class="tool-list"><div class="tool-row"><div><strong>Conjugation Lab</strong><small>8,410 sessions</small></div><div class="progress"><i style="width:88%"></i></div></div><div class="tool-row"><div><strong>Language Lab</strong><small>4,202 sessions</small></div><div class="progress"><i style="width:51%"></i></div></div><div class="tool-row"><div><strong>Study Lab</strong><small>1,678 sessions</small></div><div class="progress"><i style="width:25%"></i></div></div></div></article>
+                    <article id="activity" class="panel"><div class="panel-heading"><h2>Site activity</h2><span class="panel-note">Last 7 days</span></div><div class="bar-chart" id="activity-chart" aria-label="Site page views by day"></div></article>
+                    <article id="tools" class="panel"><div class="panel-heading"><h2>Tools</h2><span class="panel-note">Usage share</span></div><div class="tool-list"><div class="tool-row"><div><strong>Conjugation Lab</strong><small id="tool-conjugation-count">0 practice runs</small></div><div class="progress"><i id="tool-conjugation-bar" style="width:0%"></i></div></div><div class="tool-row"><div><strong>Language Lab</strong><small id="tool-language-count">No events yet</small></div><div class="progress"><i style="width:0%"></i></div></div><div class="tool-row"><div><strong>Study Lab</strong><small id="tool-study-count">No events yet</small></div><div class="progress"><i style="width:0%"></i></div></div></div></article>
                 </section>
                 <section id="accounts" class="panel accounts-panel"><div class="panel-heading"><h2>Recent accounts</h2><span class="panel-note" id="account-total">2,481 total · metadata only</span></div><div class="table-wrap"><table><thead><tr><th>Learner</th><th>Email</th><th>Joined</th><th>Last active</th><th>Account status</th></tr></thead><tbody><tr><td><span class="user-cell"><span class="user-avatar">SM</span> Sofia Morales</span></td><td>sofia.morales@example.com</td><td>17 Sep 2026</td><td>Today, 11:42</td><td><span class="pill">Verified</span></td></tr><tr><td><span class="user-cell"><span class="user-avatar">JL</span> James Lee</span></td><td>james.lee@example.com</td><td>16 Sep 2026</td><td>Today, 09:18</td><td><span class="pill">Verified</span></td></tr><tr><td><span class="user-cell"><span class="user-avatar">AM</span> Ana Martins</span></td><td>ana.martins@example.com</td><td>14 Sep 2026</td><td>Yesterday, 18:06</td><td><span class="pill">Verified</span></td></tr><tr><td><span class="user-cell"><span class="user-avatar">NK</span> Noah Kim</span></td><td>noah.kim@example.com</td><td>12 Sep 2026</td><td>12 Sep 2026</td><td><span class="pill">Verified</span></td></tr></tbody></table></div><p class="safe-note"><strong>Privacy by design.</strong> Passwords are never displayed, exported, or stored in this dashboard. Account recovery should use a secure password-reset flow; hashed passwords cannot be recovered.</p></section>
             </div>

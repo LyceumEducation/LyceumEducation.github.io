@@ -675,6 +675,7 @@
 
         function run() {
             const data = conjugate(verb.value, subject.value, "present", "indicative");
+            if (!data.error) window.LyceumAuth?.trackEvent("conjugation_practice", { tool: "Conjugation Lab" });
             if (!data.error && window.LyceumAuth) LyceumAuth.saveMemory({ lastVerb: verb.value.trim(), lastSubject: subject.value, lastWord: data.word });
             result.className = `result ${data.error ? "error" : data.ending}`;
             const word = document.querySelector("#word");

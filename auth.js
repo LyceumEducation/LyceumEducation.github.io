@@ -4,6 +4,7 @@
     const PROFILE_KEY = "lyceum.profile";
     const ACCOUNTS_KEY = "lyceum.accounts";
     const MEMORY_KEY = "lyceum.memory";
+    const ANALYTICS_KEY = "lyceum.analytics";
 
     const style = document.createElement("style");
     style.textContent = `
@@ -28,6 +29,37 @@
         else localStorage.removeItem(PROFILE_KEY);
     }
 
+    function recordAnalytics() {
+        const now = new Date();
+        const today = now.toISOString().slice(0, 10);
+        const path = window.location.pathname.split("/").pop() || "index.html";
+        const analytics = read(ANALYTICS_KEY, { pageViews: {}, daily: {}, sessions: 0, events: [] });
+        analytics.pageViews[path] = (analytics.pageViews[path] || 0) + 1;
+        analytics.daily[today] = (analytics.daily[today] || 0) + 1;
+        if (sessionStorage.getItem("lyceum.analyticsSession") !== "active") {
+            analytics.sessions += 1;
+            sessionStorage.setItem("lyceum.analyticsSession", "active");
+        }
+        analytics.events = [...analytics.events.slice(-199), { type: "page_view", path, at: now.toISOString() }];
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+        const profile = localProfile();
+        if (profile?.email) {
+            const accounts = read(ACCOUNTS_KEY, {});
+            const account = accounts[profile.email];
+            if (account) {
+                account.profile.lastActive = now.toISOString();
+                localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
+                rememberProfile(account.profile);
+            }
+        }
+
+        function trackEvent(type, data = {}) {
+            const analytics = read(ANALYTICS_KEY, { pageViews: {}, daily: {}, sessions: 0, events: [] });
+            analytics.events = [...analytics.events.slice(-199), { type, ...data, at: new Date().toISOString() }];
+            localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+        }
+    }
+
     async function hashPassword(password) {
         const bytes = new TextEncoder().encode(password);
         const digest = await crypto.subtle.digest("SHA-256", bytes);
@@ -38,7 +70,8 @@
         const normalizedEmail = email.trim().toLowerCase();
         const accounts = read(ACCOUNTS_KEY, {});
         if (accounts[normalizedEmail]) throw new Error("An account with this email already exists. Try logging in.");
-        const profile = { id: `local-${Date.now()}`, email: normalizedEmail, firstName: firstName.trim(), lastName: lastName.trim() };
+        const now = new Date().toISOString();
+        const profile = { id: `local-${Date.now()}`, email: normalizedEmail, firstName: firstName.trim(), lastName: lastName.trim(), createdAt: now, lastActive: now };
         accounts[normalizedEmail] = { profile, passwordHash: await hashPassword(password) };
         localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
         rememberProfile(profile);
@@ -50,6 +83,10 @@
         if (!account || account.passwordHash !== await hashPassword(password)) {
             throw new Error("The email or password is not correct.");
         }
+        account.profile.lastActive = new Date().toISOString();
+        const accounts = read(ACCOUNTS_KEY, {});
+        accounts[normalizedEmail] = account;
+        localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
         rememberProfile(account.profile);
     }
 
@@ -102,9 +139,12 @@
             localStorage.setItem(MEMORY_KEY, JSON.stringify(memory));
             return memory;
         },
+        getAnalytics: () => read(ANALYTICS_KEY, { pageViews: {}, daily: {}, sessions: 0, events: [] }),
+        trackEvent,
     };
 
     document.addEventListener("DOMContentLoaded", () => {
+        recordAnalytics();
         renderAuthNav();
         renderGreeting();
     });
